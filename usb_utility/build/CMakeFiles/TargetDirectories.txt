@@ -1,0 +1,3 @@
+/home/frozzel/OSiSP_coursePr/usb_utility/build/CMakeFiles/usb_utility.dir
+/home/frozzel/OSiSP_coursePr/usb_utility/build/CMakeFiles/edit_cache.dir
+/home/frozzel/OSiSP_coursePr/usb_utility/build/CMakeFiles/rebuild_cache.dir

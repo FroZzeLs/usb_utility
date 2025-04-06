@@ -1,0 +1,94 @@
+2025-04-06 23:15:14 | --- Log Started ---
+2025-04-06 23:15:14 | Application started.
+2025-04-06 23:15:14 | Initial libusb scan complete. Found 8 devices.
+2025-04-06 23:15:14 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=27c6, PID=5125, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=0489, PID=e0e1, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=13d3, PID=56f8, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=0dd8, PID=3708, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:15:14 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:19 | Application shutting down.
+2025-04-06 23:18:19 | --- Log Ended ---
+2025-04-06 23:18:53 | --- Log Started ---
+2025-04-06 23:18:53 | Application started.
+2025-04-06 23:18:53 | Initial libusb scan complete. Found 7 devices.
+2025-04-06 23:18:53 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:53 | Initial Device (libusb): VID=27c6, PID=5125, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:53 | Initial Device (libusb): VID=0489, PID=e0e1, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:53 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:53 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:53 | Initial Device (libusb): VID=13d3, PID=56f8, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:18:53 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:19:10 | Application shutting down.
+2025-04-06 23:19:10 | --- Log Ended ---
+2025-04-06 23:24:51 | --- Log Started ---
+2025-04-06 23:24:51 | Application started.
+2025-04-06 23:24:51 | Initial libusb scan complete. Found 7 devices.
+2025-04-06 23:24:51 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:24:51 | Initial Device (libusb): VID=27c6, PID=5125, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:24:51 | Initial Device (libusb): VID=0489, PID=e0e1, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:24:51 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:24:51 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:24:51 | Initial Device (libusb): VID=13d3, PID=56f8, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:24:51 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:26 | Application shutting down.
+2025-04-06 23:25:26 | --- Log Ended ---
+2025-04-06 23:25:33 | --- Log Started ---
+2025-04-06 23:25:33 | Application started.
+2025-04-06 23:25:33 | Initial libusb scan complete. Found 9 devices.
+2025-04-06 23:25:33 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=27c6, PID=5125, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=0489, PID=e0e1, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=13d3, PID=56f8, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=0dd8, PID=3708, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=13fe, PID=4200, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:33 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:51 | Application shutting down.
+2025-04-06 23:25:51 | --- Log Ended ---
+2025-04-06 23:25:54 | --- Log Started ---
+2025-04-06 23:25:54 | Application started.
+2025-04-06 23:25:54 | Initial libusb scan complete. Found 8 devices.
+2025-04-06 23:25:54 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=27c6, PID=5125, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=0489, PID=e0e1, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=1d6b, PID=0003, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=13d3, PID=56f8, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=13fe, PID=4200, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:25:54 | Initial Device (libusb): VID=1d6b, PID=0002, Manuf="N/A", Prod="N/A", Serial="N/A" (Node: /dev/bus/usb/00/00)
+2025-04-06 23:26:12 | Application shutting down.
+2025-04-06 23:26:12 | --- Log Ended ---
+2025-04-06 23:29:56 | --- Log Started ---
+2025-04-06 23:29:56 | Application started.
+2025-04-06 23:29:56 | Initial device scan complete. Found 7 devices.
+2025-04-06 23:29:56 | Initial Device: VID=1d6b, PID=0003 (Node: /dev/bus/usb/4/1)
+2025-04-06 23:29:56 | Initial Device: VID=27c6, PID=5125 (Node: /dev/bus/usb/3/3)
+2025-04-06 23:29:56 | Initial Device: VID=0489, PID=e0e1 (Node: /dev/bus/usb/3/2)
+2025-04-06 23:29:56 | Initial Device: VID=1d6b, PID=0002 (Node: /dev/bus/usb/3/1)
+2025-04-06 23:29:56 | Initial Device: VID=1d6b, PID=0003 (Node: /dev/bus/usb/2/1)
+2025-04-06 23:29:56 | Initial Device: VID=13d3, PID=56f8 (Node: /dev/bus/usb/1/2)
+2025-04-06 23:29:56 | Initial Device: VID=1d6b, PID=0002 (Node: /dev/bus/usb/1/1)
+2025-04-06 23:30:07 | Device Added: VID=0dd8, PID=3708, Manuf=Netac, Prod=OnlyDisk, Serial=FC157FBB7BEB48D6 (SysPath: /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.3/usb1/1-1) (DevNode: /dev/bus/usb/001/010)
+2025-04-06 23:30:19 | Device Added: VID=13fe, PID=4300, Manuf=        , Prod=USB DISK 2.0, Serial=071907FAA33E2A02 (SysPath: /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.3/usb1/1-2) (DevNode: /dev/bus/usb/001/011)
+2025-04-06 23:30:57 | Device Added: VID=13fe, PID=4200, Manuf=        , Prod=USB DISK 2.0, Serial=90005B65461B6326 (SysPath: /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.3/usb1/1-3) (DevNode: /dev/bus/usb/001/012)
+2025-04-06 23:31:42 | Application shutting down.
+2025-04-06 23:31:42 | --- Log Ended ---
+2025-04-06 23:35:07 | --- Log Started ---
+2025-04-06 23:35:07 | Application started.
+2025-04-06 23:35:07 | Initial device scan complete. Found 7 devices.
+2025-04-06 23:35:07 | Initial Device: VID=1d6b, PID=0003 (Node: /dev/bus/usb/4/1)
+2025-04-06 23:35:07 | Initial Device: VID=27c6, PID=5125 (Node: /dev/bus/usb/3/3)
+2025-04-06 23:35:07 | Initial Device: VID=0489, PID=e0e1 (Node: /dev/bus/usb/3/2)
+2025-04-06 23:35:07 | Initial Device: VID=1d6b, PID=0002 (Node: /dev/bus/usb/3/1)
+2025-04-06 23:35:07 | Initial Device: VID=1d6b, PID=0003 (Node: /dev/bus/usb/2/1)
+2025-04-06 23:35:07 | Initial Device: VID=13d3, PID=56f8 (Node: /dev/bus/usb/1/2)
+2025-04-06 23:35:07 | Initial Device: VID=1d6b, PID=0002 (Node: /dev/bus/usb/1/1)
+2025-04-06 23:35:28 | Device Added: VID=13fe, PID=4200, Manuf=        , Prod=USB DISK 2.0, Serial=90005B65461B6326 (SysPath: /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.3/usb1/1-3) (DevNode: /dev/bus/usb/001/013)
+2025-04-06 23:35:35 | Device Added: VID=0dd8, PID=3708, Manuf=Netac, Prod=OnlyDisk, Serial=FC157FBB7BEB48D6 (SysPath: /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.3/usb1/1-1) (DevNode: /dev/bus/usb/001/014)
+2025-04-06 23:35:47 | Device Added: VID=13fe, PID=4300, Manuf=        , Prod=USB DISK 2.0, Serial=071907FAA33E2A02 (SysPath: /sys/devices/pci0000:00/0000:00:08.1/0000:03:00.3/usb1/1-2) (DevNode: /dev/bus/usb/001/015)
+2025-04-06 23:36:26 | Application shutting down.
+2025-04-06 23:36:26 | --- Log Ended ---

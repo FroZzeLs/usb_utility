@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/usb_utility.dir/src/main.cpp.o CMakeFiles/usb_utility.dir/src/logger.cpp.o CMakeFiles/usb_utility.dir/src/usb_lister.cpp.o CMakeFiles/usb_utility.dir/src/usb_detector.cpp.o -o usb_utility  -lusb-1.0 -ludev 
