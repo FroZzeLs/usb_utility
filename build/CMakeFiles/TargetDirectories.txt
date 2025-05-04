@@ -1,0 +1,7 @@
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/usb_monitor.dir
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/edit_cache.dir
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/rebuild_cache.dir
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/list_install_components.dir
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/install.dir
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/install/local.dir
+/home/frozzel/OSiSP_coursePr/usb_monitor/build/CMakeFiles/install/strip.dir
