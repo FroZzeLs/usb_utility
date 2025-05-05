@@ -15,7 +15,6 @@
 std::atomic<Application*> Application::instance_{nullptr};
 std::atomic<bool> Application::running_{false};
 
-
 Application::Application(bool as_daemon)
  : is_daemon_(as_daemon), udev_monitor_(running_) 
 {
