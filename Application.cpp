@@ -1,14 +1,17 @@
 #include "Application.h"
 #include "DaemonUtil.h"
-#include "ResultDisplay.h"
+#include "ResultDisplay.h" 
 #include <iostream>
 #include <syslog.h>
 #include <stdexcept>
-#include <cstdlib> 
-#include <cstring> 
-#include <libudev.h>
+#include <cstdlib>      
+#include <cstring>      
+#include <libudev.h>    
+#include <fstream>      
+#include <sstream>      
+#include <iomanip>      
 
-// Инициализация статических членов
+
 std::atomic<Application*> Application::instance_{nullptr};
 std::atomic<bool> Application::running_{false};
 
@@ -18,8 +21,10 @@ Application::Application(bool as_daemon)
 {
     instance_.store(this); 
     if (is_daemon_) {
-        DaemonUtil::daemonize();
+        DaemonUtil::daemonize(); 
+        
     } else {
+        
         openlog("usb_monitor_fg", LOG_PID | LOG_PERROR, LOG_USER);
         syslog(LOG_INFO, "USB Monitor запущен в foreground режиме.");
         std::cout << "USB Monitor запущен в foreground режиме. Нажмите Ctrl+C для выхода." << std::endl;
@@ -33,11 +38,13 @@ Application::~Application() {
 }
 
 bool Application::initialize() {
+    syslog(LOG_DEBUG, "[App::initialize] Начало инициализации...");
     if (!udev_monitor_.initialize()) {
-        syslog(LOG_CRIT, "[App] Ошибка инициализации UdevMonitor.");
+        syslog(LOG_CRIT, "[App::initialize] Ошибка инициализации UdevMonitor.");
         return false;
     }
     setupSignalHandlers();
+    syslog(LOG_DEBUG, "[App::initialize] Инициализация завершена успешно.");
     return true;
 }
 
@@ -67,22 +74,30 @@ void Application::staticSignalHandler(int signum) {
 void Application::handleSignal(int signum) {
     syslog(LOG_INFO, "[App] Получен сигнал %d, инициирую остановку...", signum);
     running_.store(false); 
-    udev_monitor_.stop();
+    udev_monitor_.stop(); 
 }
 
 int Application::run() {
+    syslog(LOG_INFO, "[App::run] Попытка инициализации...");
     if (!initialize()) {
+        syslog(LOG_ERR, "[App::run] Инициализация не удалась.");
         cleanup();
         return 1;
     }
 
+    syslog(LOG_INFO, "[App::run] Инициализация успешна. Запуск UdevMonitor::run...");
+    
     udev_monitor_.run([this](struct udev_device* dev){
         this->onDeviceEvent(dev);
     });
 
+    
+    syslog(LOG_INFO, "[App::run] UdevMonitor::run завершен. Вызов cleanup...");
     cleanup();
+    syslog(LOG_INFO, "[App::run] Приложение завершает работу.");
     return 0;
 }
+
 
 bool Application::hasMassStorageInterface(struct udev_device* usb_dev) {
     if (!usb_dev) return false;
@@ -91,14 +106,14 @@ bool Application::hasMassStorageInterface(struct udev_device* usb_dev) {
     int num_configs = std::atoi(bNumConfigurations_str);
     if (num_configs <= 0) return false;
 
-    struct udev* udev_ctx = udev_device_get_udev(usb_dev); 
+    struct udev* udev_ctx = udev_device_get_udev(usb_dev);
     if (!udev_ctx) return false;
 
     struct udev_enumerate* enumerate = udev_enumerate_new(udev_ctx);
     if (!enumerate) return false;
 
     bool found_mass_storage = false;
-    try { 
+    try {
         udev_enumerate_add_match_parent(enumerate, usb_dev);
         udev_enumerate_add_match_subsystem(enumerate, "usb");
 
@@ -128,7 +143,7 @@ bool Application::hasMassStorageInterface(struct udev_device* usb_dev) {
 }
 
 
-// Обработчик событий от UdevMonitor
+
 void Application::onDeviceEvent(struct udev_device* dev) {
     const char* action = udev_device_get_action(dev);
     if (!action || (strcmp(action, "add") != 0 && strcmp(action, "remove") != 0)) {
@@ -144,7 +159,7 @@ void Application::onDeviceEvent(struct udev_device* dev) {
         return;
     }
 
-    // --- Обработка отключения USB устройства ---
+    
     if (strcmp(action, "remove") == 0 && strcmp(subsystem, "usb") == 0) {
         auto it = active_devices_map_.find(devpath);
         if (it != active_devices_map_.end()) {
@@ -155,17 +170,24 @@ void Application::onDeviceEvent(struct udev_device* dev) {
         return;
     }
 
-    // --- Обработка добавления USB устройства ---
+    
     if (strcmp(action, "add") == 0 && strcmp(subsystem, "usb") == 0 && devtype && strcmp(devtype, "usb_device") == 0) {
         if (active_devices_map_.count(devpath)) {
-             syslog(LOG_DEBUG, "[App] Повторное событие USB add для %s, игнорируем.", devpath);
-             return; // Уже есть в карте
+             syslog(LOG_DEBUG, "[App] Повторное событие USB add для %s, игнорируем базовую обработку.", devpath);
+             
+             if (!active_devices_map_[devpath].results_displayed && !active_devices_map_[devpath].is_likely_storage) {
+                 syslog(LOG_WARNING, "[App] Повторное USB add для %s (не накопитель), но окно еще не было показано. Показываем базовую информацию.", devpath);
+                 ResultDisplay::prepareAndDisplay(active_devices_map_[devpath], false);
+                 active_devices_map_[devpath].results_displayed = true; 
+             }
+             return;
         }
 
         DeviceInfo info;
         info.devpath = devpath;
         info.results_displayed = false;
         info.block_device = "";
+        info.capacity_gb = "N/A"; 
 
         const char* vid = udev_device_get_sysattr_value(dev, "idVendor");
         const char* pid = udev_device_get_sysattr_value(dev, "idProduct");
@@ -179,22 +201,22 @@ void Application::onDeviceEvent(struct udev_device* dev) {
                info.devpath.c_str());
 
         info.is_likely_storage = hasMassStorageInterface(dev);
-         syslog(LOG_INFO, "[App] Устройство %s %s содержать Mass Storage интерфейс.",
+        syslog(LOG_INFO, "[App] Устройство %s %s содержать Mass Storage интерфейс.",
                info.devpath.c_str(), info.is_likely_storage ? "похоже, что" : "НЕ похоже, что");
 
-        active_devices_map_[info.devpath] = info; // Сохраняем
+        active_devices_map_[info.devpath] = info; 
 
         if (!info.is_likely_storage) {
              syslog(LOG_INFO, "[App] Вызов отображения базовой информации для НЕ-накопителя %s", info.devpath.c_str());
              ResultDisplay::prepareAndDisplay(info, false);
-             active_devices_map_[info.devpath].results_displayed = true; // Отмечаем, что показали
+             active_devices_map_[info.devpath].results_displayed = true; 
         } else {
              syslog(LOG_DEBUG, "[App] Устройство %s похоже на накопитель, ожидаем событие block add.", info.devpath.c_str());
         }
         return;
     }
 
-    // --- Обработка добавления блочного устройства ---
+    
     if (strcmp(action, "add") == 0 && strcmp(subsystem, "block") == 0) {
         const char* id_bus = udev_device_get_property_value(dev, "ID_BUS");
         const char* id_type = udev_device_get_property_value(dev, "ID_TYPE");
@@ -222,17 +244,49 @@ void Application::onDeviceEvent(struct udev_device* dev) {
                     auto it = active_devices_map_.find(parent_devpath);
                     if (it != active_devices_map_.end()) {
                         DeviceInfo& stored_info = it->second;
-                        if (!stored_info.results_displayed) { // Показываем окно с тестами только если оно еще не было показано
+                        if (!stored_info.results_displayed) { 
                             stored_info.block_device = devnode;
-                            stored_info.results_displayed = true; // Ставим флаг
+
+                            
+                            stored_info.capacity_gb = "N/A"; 
+                            const char* device_name = strrchr(devnode, '/'); 
+                            if (device_name) {
+                                device_name++;
+                                std::string size_path = "/sys/block/";
+                                size_path += device_name;
+                                size_path += "/size";
+                                std::ifstream size_file(size_path);
+                                if (size_file.is_open()) {
+                                    unsigned long long sectors = 0;
+                                    if (size_file >> sectors) {
+                                        unsigned long long total_bytes = sectors * 512;
+                                        double capacity_gb_double = static_cast<double>(total_bytes) / (1024.0 * 1024.0 * 1024.0);
+                                        std::stringstream ss;
+                                        ss << std::fixed << std::setprecision(1) << capacity_gb_double;
+                                        stored_info.capacity_gb = ss.str();
+                                        syslog(LOG_INFO, "[App] Объем %s: %llu секторов = %s GB", devnode, sectors, stored_info.capacity_gb.c_str());
+                                    } else {
+                                        syslog(LOG_WARNING, "[App] Не удалось прочитать число секторов из %s", size_path.c_str());
+                                    }
+                                    size_file.close();
+                                } else {
+                                     syslog(LOG_WARNING, "[App] Не удалось открыть файл sysfs для получения размера: %s", size_path.c_str());
+                                }
+                            } else {
+                                 syslog(LOG_WARNING, "[App] Не удалось извлечь имя устройства из %s", devnode);
+                            }
+                            
+
+                            stored_info.results_displayed = true; 
                             syslog(LOG_INFO, "[App] Связь установлена. ВЫЗОВ отображения/тестов для накопителя %s (%s)",
                                    parent_devpath, devnode);
-                            ResultDisplay::prepareAndDisplay(stored_info, true);
+                            ResultDisplay::prepareAndDisplay(stored_info, true); 
                         } else {
                              syslog(LOG_DEBUG, "[App] Окно для USB %s уже было показано, игнорируем событие block add для %s.", parent_devpath, devnode);
                         }
                     } else {
                         syslog(LOG_WARNING, "[App] !!! Не найдена информация о USB-родителе %s в карте для %s при событии block add.", parent_devpath, devnode);
+                         
                     }
                 } else { syslog(LOG_WARNING, "[App] Не удалось получить devpath для родительского USB устройства %s", devnode); }
             } else {
@@ -241,7 +295,6 @@ void Application::onDeviceEvent(struct udev_device* dev) {
         }
         return;
     }
-
      if (strcmp(action, "add") == 0) {
         syslog(LOG_DEBUG, "[App] Игнорируется событие add: subsystem=%s, devtype=%s, devpath=%s",
             subsystem, devtype ? devtype : "N/A", devpath);

@@ -3,13 +3,14 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include <cstdlib>   
-#include <unistd.h>  
-#include <cstdio>    
+#include <cstdlib>     
+#include <unistd.h>    
+#include <cstdio>     
 #include <syslog.h>
-#include <cstring> 
-#include <cerrno>  
+#include <cstring>   
+#include <cerrno>    
 #include <sys/wait.h> 
+#include <streambuf>  
 
 ResultDisplay::file_buf::file_buf(FILE* f) : fp(f) {}
 int ResultDisplay::file_buf::overflow(int c) { return fputc(c, fp) == EOF ? EOF : c; }
@@ -43,6 +44,9 @@ void ResultDisplay::prepareAndDisplay(const DeviceInfo& info, bool is_storage_de
     fprintf(log_file_c, "  Производитель: %s\n", info.manufacturer.empty() ? "N/A" : info.manufacturer.c_str());
     fprintf(log_file_c, "  Устройство: %s\n", info.product_name.empty() ? "N/A" : info.product_name.c_str());
     fprintf(log_file_c, "  Блочное устройство: %s\n", info.block_device.empty() ? "N/A" : info.block_device.c_str());
+    if (is_storage_device && !info.capacity_gb.empty() && info.capacity_gb != "N/A") {
+         fprintf(log_file_c, "  Объем накопителя: %s GB\n", info.capacity_gb.c_str());
+    }
     fprintf(log_file_c, "  Является накопителем: %s\n", is_storage_device ? "Да" : "Нет");
     fprintf(log_file_c, "========================================\n");
     fflush(log_file_c);
@@ -73,11 +77,10 @@ void ResultDisplay::prepareAndDisplay(const DeviceInfo& info, bool is_storage_de
     syslog(LOG_INFO, "[Display] ПОПЫТКА ВЫПОЛНЕНИЯ КОМАНДЫ: %s", command.c_str());
     int ret = system(command.c_str());
     syslog(LOG_INFO, "[Display] КОМАНДА ЗАВЕРШЕНА. Код возврата system(): %d", ret);
-
     int exit_status = -1;
     if (WIFEXITED(ret)) { exit_status = WEXITSTATUS(ret); }
 
-     if (ret == 0 || exit_status == 1) { syslog(LOG_INFO, "[Display] Команда zenity предположительно выполнена успешно."); }
+    if (ret == 0 || exit_status == 1) { syslog(LOG_INFO, "[Display] Команда zenity предположительно выполнена успешно."); }
     else {
          if (exit_status == 127) { syslog(LOG_WARNING, "[Display] Команда zenity не найдена (exit status 127). Установите пакет 'zenity'."); }
          else { syslog(LOG_WARNING, "[Display] Команда zenity завершилась с ошибкой (system ret: %d, exit status: %d). Проблемы с доступом к GUI сессии?", ret, exit_status); }
