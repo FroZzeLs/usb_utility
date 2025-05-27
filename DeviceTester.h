@@ -5,7 +5,7 @@
 
 class DeviceTester {
 public:
-    static void performTests(const std::string& block_dev_path, std::ostream& out_stream);
+    void perform_tests_read_only(const std::string& block_dev_path, std::ostream& out_stream);
 
 private:
     static long long current_time_ms();
